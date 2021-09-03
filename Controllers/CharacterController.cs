@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Dotnet_Rpg.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,15 +9,27 @@ namespace Dotnet_Rpg.Controllers
   [Route("[controller]")]
   public class CharacterController : ControllerBase
   {
-    private static Character knight = new Character();
-
-    
-
-    [HttpGet]
-    //This function enables us to send status codes back to the client with the requested data
-    public ActionResult<Character> Get() 
+    public static int Id = 0;
+    private static List<Character> characters = new List<Character>
     {
-      return Ok(knight);
+        new Character{Id=Id++},
+        new Character{Id=Id++,Name="Sam",Strength=1000},
+        new Character{Id=Id++,Name="Sam",Class=RpgClass.Mage},
+    };
+
+    //The ActionResult function enables us to send status codes back to the client with the requested data
+
+
+    [HttpGet("all")]
+    // [Route("GetAll")]
+    public ActionResult<List<Character>> Get()
+    {
+      return Ok(characters);
+    }
+
+    [HttpGet("{id}")]
+    public ActionResult<Character> GetSingle(int id) {
+      return Ok(characters.FirstOrDefault(c => c.Id == id));
     }
   }
 }
