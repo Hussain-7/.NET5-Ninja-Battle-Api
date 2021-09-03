@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Dotnet_Rpg.Models;
 using Dotnet_Rpg.Services.CharacterService;
 using Microsoft.AspNetCore.Mvc;
@@ -17,19 +18,19 @@ namespace Dotnet_Rpg.Controllers
     //The ActionResult function enables us to send status codes back to the client with the requested data
     [HttpGet("all")]
     // [Route("GetAll")]
-    public ActionResult<List<Character>> Get()
+    public async Task<ActionResult<List<Character>>> Get()
     {
-      return Ok(_characterService.GetAllCharacter());
+      return Ok(await _characterService.GetAllCharacter());
     }
 
     [HttpGet("{id}")]
-    public ActionResult<Character> GetSingle(int id) {
-      return Ok(_characterService.GetCharacterById(id));
+    public async Task<ActionResult<Character>> GetSingle(int id) {
+      return Ok(await _characterService.GetCharacterById(id));
     }
 
     [HttpPost]
-    public ActionResult<List<Character>> AddCharacter(Character newCharacter) {
-        return Ok(_characterService.AddCharacter(newCharacter));
+    public async Task<ActionResult<List<Character>>> AddCharacter(Character newCharacter) {
+        return Ok(await _characterService.AddCharacter(newCharacter));
     }
   }
 }
