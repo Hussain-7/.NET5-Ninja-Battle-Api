@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dotnet_Rpg.Services.CharacterService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,7 +33,10 @@ namespace Dotnet_Rpg
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Dotnet_Rpg", Version = "v1" });
             });
-        }
+            //Now basically whenever we would need to change the Service we could change the implementing class
+            //This is the polymorphic behavior and dependency injection
+            services.AddScoped<ICharacterService, CharacterService>();
+    }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

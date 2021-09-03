@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Dotnet_Rpg.Models;
+using Dotnet_Rpg.Services.CharacterService;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dotnet_Rpg.Controllers
@@ -9,27 +10,26 @@ namespace Dotnet_Rpg.Controllers
   [Route("[controller]")]
   public class CharacterController : ControllerBase
   {
-    public static int Id = 0;
-    private static List<Character> characters = new List<Character>
-    {
-        new Character{Id=Id++},
-        new Character{Id=Id++,Name="Sam",Strength=1000},
-        new Character{Id=Id++,Name="Sam",Class=RpgClass.Mage},
-    };
-
+    private readonly ICharacterService _characterService;
+    public CharacterController(ICharacterService characterService) {
+      _characterService = characterService;
+    }
     //The ActionResult function enables us to send status codes back to the client with the requested data
-
-
     [HttpGet("all")]
     // [Route("GetAll")]
     public ActionResult<List<Character>> Get()
     {
-      return Ok(characters);
+      return Ok(_characterService.GetAllCharacter());
     }
 
     [HttpGet("{id}")]
     public ActionResult<Character> GetSingle(int id) {
-      return Ok(characters.FirstOrDefault(c => c.Id == id));
+      return Ok(_characterService.GetCharacterById(id));
+    }
+
+    [HttpPost]
+    public ActionResult<List<Character>> AddCharacter(Character newCharacter) {
+        return Ok(_characterService.AddCharacter(newCharacter));
     }
   }
 }
