@@ -16,6 +16,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 
 namespace Dotnet_Rpg
 {
@@ -36,6 +37,15 @@ namespace Dotnet_Rpg
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Dotnet_Rpg", Version = "v1" });
+              //Swagger configration to add bearer token in api requests
+              c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+              {
+                Description = "Standard Authorization header using the Bearer scheme. Example: \"bearer {token}\"",
+                In = ParameterLocation.Header,
+                Name = "Authorization",
+                Type = SecuritySchemeType.ApiKey,
+              });
+              c.OperationFilter<SecurityRequirementsOperationFilter>();
             });
             //Added Auto mapper in services
             services.AddAutoMapper(typeof(Startup));
