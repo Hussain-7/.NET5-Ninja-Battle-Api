@@ -4,10 +4,12 @@ using System.Threading.Tasks;
 using Dotnet_Rpg.Dtos.Character;
 using Dotnet_Rpg.Models;
 using Dotnet_Rpg.Services.CharacterService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dotnet_Rpg.Controllers
 {
+  [Authorize]
   [ApiController]
   [Route("[controller]")]
   public class CharacterController : ControllerBase
