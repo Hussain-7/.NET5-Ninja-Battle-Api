@@ -40,7 +40,8 @@ namespace Dotnet_Rpg
             //Now basically whenever we would need to change the Service we could change the implementing class
             //This is the polymorphic behavior and dependency injection
             services.AddScoped<ICharacterService, CharacterService>();
-    }
+            services.AddScoped<IAuthRepository, AuthRepository>(); 
+            }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
