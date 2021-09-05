@@ -12,5 +12,6 @@ namespace Dotnet_Rpg.Data
 
         //Whenever we need to a table to our db we will create a property like this
         public DbSet<Character> Characters { get; set; }
+        public DbSet<User> Users { get; set; }
   }
 }
