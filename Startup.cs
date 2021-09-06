@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dotnet_Rpg.Data;
 using Dotnet_Rpg.Services.CharacterService;
+using Dotnet_Rpg.Services.WeaponService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -52,6 +54,7 @@ namespace Dotnet_Rpg
             //Now basically whenever we would need to change the Service we could change the implementing class
             //This is the polymorphic behavior and dependency injection
             services.AddScoped<ICharacterService, CharacterService>();
+            services.AddScoped<IWeaponService, WeaponService>();
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
@@ -64,6 +67,7 @@ namespace Dotnet_Rpg
                 ValidateAudience = false
               };
             });
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
     }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Dotnet_Rpg.Dtos.Character;
 using Dotnet_Rpg.Models;
@@ -23,6 +24,11 @@ namespace Dotnet_Rpg.Controllers
     // [Route("GetAll")]
     public async Task<ActionResult<ServiceResponse<List<GetCharacterDto>>>> Get()
     {
+      //Actually the Claims that are currently authorized as now we have added authorize attribe
+      //now we have access to claims of whoevers token is given.and throught Claims NameIdentifier we 
+      // can get user Id
+      // int id = int.Parse((User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value));
+      //Now using httpContext in Services so no need to find user id here
       return Ok(await _characterService.GetAllCharacter());
     }
 

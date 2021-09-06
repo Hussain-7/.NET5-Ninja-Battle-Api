@@ -92,7 +92,7 @@ namespace Dotnet_Rpg.Data
     private string CreateToken(User user)
     {
       
-      var claims = new List<Claim>
+      var claims = new List<Claim>//Information that we want to be actually hashed to token
         {
           new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
           new Claim(ClaimTypes.Name,user.Username),
