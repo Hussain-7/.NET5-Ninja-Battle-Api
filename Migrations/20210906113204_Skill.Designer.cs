@@ -4,14 +4,16 @@ using Dotnet_Rpg.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Dotnet_Rpg.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210906113204_Skill")]
+    partial class Skill
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,68 +87,6 @@ namespace Dotnet_Rpg.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Skills");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Damage = 9000,
-                            Name = "Multi-Shadow-Clone Jutsu"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Damage = 10000,
-                            Name = "Chidori"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Damage = 8000,
-                            Name = "Tsukuyomi"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Damage = 5000,
-                            Name = "Hirudora"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Damage = 8000,
-                            Name = "Flying Thunder God"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Damage = 6000,
-                            Name = "Byakugou No Jutsu"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Damage = 4000,
-                            Name = "Rasengan"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Damage = 7000,
-                            Name = "Raikiri"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Damage = 3000,
-                            Name = "Chakra Enhanced Strength"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Damage = 2500,
-                            Name = "Shadow Imitation Jutsu"
-                        });
                 });
 
             modelBuilder.Entity("Dotnet_Rpg.Models.User", b =>
