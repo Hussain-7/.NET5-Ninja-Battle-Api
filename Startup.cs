@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dotnet_Rpg.Data;
 using Dotnet_Rpg.Services.CharacterService;
+using Dotnet_Rpg.Services.FightService;
 using Dotnet_Rpg.Services.WeaponService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -56,6 +57,8 @@ namespace Dotnet_Rpg
             services.AddScoped<ICharacterService, CharacterService>();
             services.AddScoped<IWeaponService, WeaponService>();
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IFightService, FightService>();
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
